@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
 import GoogleLogin from "../components/GoogleLogin";
 import { login } from "../redux/actions/authActions";
-
-// const API = process.env.REACT_APP_API;
 
 function Login() {
   const dispatch = useDispatch();

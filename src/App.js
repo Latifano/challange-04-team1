@@ -12,7 +12,6 @@ import NoTokenAccess from "./components/NoTokenAccess";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-// import PostDetails from "./pages/posts/PostDetails";
 import UseSelector from "./pages/UseSelector";
 
 function App() {
