@@ -10,50 +10,57 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NoTokenAccess from "./components/NoTokenAccess";
 import { ToastContainer } from "react-toastify";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+// import PostDetails from "./pages/posts/PostDetails";
+import UseSelector from "./pages/UseSelector";
 
 function App() {
   return (
     <>
-      <GoogleOAuthProvider
-        clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
-      >
-        <BrowserRouter>
-          {/* <Header /> */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/login"
-              element={
-                <NoTokenAccess>
-                  <Login />
-                </NoTokenAccess>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <NoTokenAccess>
-                  <Register />
-                </NoTokenAccess>
-              }
-            />
-            <Route
-              path="/users/dashboard"
-              element={
-                <Protected>
-                  <Dashboard />
-                </Protected>
-              }
-            />
-          </Routes>
+      <Provider store={store}>
+        <GoogleOAuthProvider
+          clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
+        >
+          <BrowserRouter>
+            {/* <Header /> */}
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/login"
+                element={
+                  <NoTokenAccess>
+                    <Login />
+                  </NoTokenAccess>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <NoTokenAccess>
+                    <Register />
+                  </NoTokenAccess>
+                }
+              />
+              <Route path="/useselector" element={<UseSelector />} />
+              <Route
+                path="/users/dashboard"
+                element={
+                  <Protected>
+                    <Dashboard />
+                  </Protected>
+                }
+              />
+            </Routes>
 
-          <ToastContainer theme="colored" />
+            <ToastContainer theme="colored" />
 
-          <Routes>
-            <Route path="/detail/:id" element={<MovieDetails />} />
-          </Routes>
-        </BrowserRouter>
-      </GoogleOAuthProvider>
+            <Routes>
+              <Route path="/detail/:id" element={<MovieDetails />} />
+            </Routes>
+          </BrowserRouter>
+        </GoogleOAuthProvider>
+      </Provider>
     </>
   );
 }

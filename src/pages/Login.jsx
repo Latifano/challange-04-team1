@@ -1,54 +1,68 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import GoogleLogin from "../components/GoogleLogin";
+import { login } from "../redux/actions/authActions";
 
-const API = process.env.REACT_APP_API;
+// const API = process.env.REACT_APP_API;
+
 function Login() {
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const key = "https://km4-challenge-5-api.up.railway.app/api"
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(API);
 
-    try {
-      let data = JSON.stringify({
-        email,
-        password,
-      });
+    let data = JSON.stringify({
+      email,
+      password,
+    });
 
-      let config = {
-        method: "post",
-        url: `${process.env.REACT_APP_API}/v1/auth/login`,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: data,
-      };
-
-      const response = await axios.request(config);
-      const { token } = response.data.data;
-
-      localStorage.setItem("token", token);
-
-      // navigate("/");
-
-      // Temporary solution
-      window.location.href = "/";
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        toast.error(error.response.data.message);
-        return;
-      }
-      toast.error(error.message);
-    }
+    dispatch(login(data, navigate));
   };
+
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     let data = JSON.stringify({
+  //       email,
+  //       password,
+  //     });
+
+  //     let config = {
+  //       method: "post",
+  //       url: `${process.env.REACT_APP_API}/v1/auth/login`,
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       data: data,
+  //     };
+
+  //     const response = await axios.request(config);
+  //     const { token } = response.data.data;
+
+  //     localStorage.setItem("token", token);
+
+  //     // navigate("/");
+
+  //     // Temporary solution
+  //     window.location.href = "/";
+  //   } catch (error) {
+  //     if (axios.isAxiosError(error)) {
+  //       toast.error(error.response.data.message);
+  //       return;
+  //     }
+  //     toast.error(error.message);
+  //   }
+  // };
 
   return (
     <Container className="p-4">
