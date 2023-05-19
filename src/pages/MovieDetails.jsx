@@ -4,12 +4,20 @@ import { getAllMovieDetail } from "../api";
 import { Col, Container, Row } from "react-bootstrap";
 import ButtonLogin from "../components/ButtonLogin";
 import ButtonRegis from "../components/ButtonRegis";
+import { useSelector, useDispatch } from "react-redux";
+import { getMovieDetails } from "../redux/actions/movieActions";
 
 function MovieDetails() {
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const [detailMovie, setdetailMovie] = useState([]);
 
+  const { movieDetails } = useSelector((state) => state.movies);
+
+  useEffect(() => {
+    dispatch(getMovieDetails(id));
+  }, [dispatch, id]);
   // Genre
+  const [detailMovie, setdetailMovie] = useState([]);
   const [movieGenre, setmovieGenre] = useState([]);
 
   useEffect(() => {

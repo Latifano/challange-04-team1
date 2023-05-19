@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import GoogleLogin from "../components/GoogleLogin";
 import { login } from "../redux/actions/authActions";
 

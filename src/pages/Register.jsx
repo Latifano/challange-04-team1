@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import GoogleLogin from "../components/GoogleLogin";
 import { register } from "../redux/actions/authActions";
 
@@ -27,44 +24,6 @@ function Register() {
 
     dispatch(register(data, navigate));
   };
-
-  // const onSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     let data = JSON.stringify({
-  //       name,
-  //       email,
-  //       password,
-  //     });
-
-  //     let config = {
-  //       method: "post",
-  //       url: `${process.env.REACT_APP_API}/v1/auth/register`,
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       data: data,
-  //     };
-
-  //     const response = await axios.request(config);
-  //     const { token } = response.data.data;
-
-  //     localStorage.setItem("token", token);
-
-  //     // navigate("/");
-
-  //     // Temporary solution
-  //     window.location.href = "/";
-  //   } catch (error) {
-  //     if (axios.isAxiosError(error)) {
-  //       toast.error(error.response.data.message);
-  //       return;
-  //     }
-  //     toast.error(error.message);
-  //   }
-  // };
-
   return (
     <Container className="p-4">
       <Form onSubmit={onSubmit}>
